@@ -12,9 +12,11 @@
                         <field name="passport_number"/>
                         <field name="expiration_date"/>
                         <field name="file" filename="file_filename"/>
+                        <field name="passport_image" filename="passport_image_filename"/>
                     </group>
                     <footer>
                         <button name="action_read_passport" type="object" string="📷 Leer pasaporte" class="btn-primary"/>
+                        <button name="action_read_image" type="object" string="📷 Leer desde imagen" class="btn-secondary"/>
                     </footer>
                 </sheet>
             </form>

@@ -7,6 +7,7 @@
     'depends': ['base'],
     'data': [
         'security/ir.model.access.csv',
+        'data/passport_expiry_cron.xml',
         'views/passport_reader_views.xml',
         'views/res_partner_views.xml',
     ],

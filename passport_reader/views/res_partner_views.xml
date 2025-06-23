@@ -10,7 +10,7 @@
                     <group>
                         <field name="passport_number"/>
                         <field name="passport_expiration_date"/>
-                        <field name="passport_status" widget="statusbar" statusbar_visible="valid,expiring,expired"/>
+                        <field name="passport_status" widget="badge"/>
                     </group>
                     <group string="History">
                         <field name="passport_history_ids" readonly="1" nolabel="1" context="{'default_partner_id': active_id}"/>
