@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_passport_reader_form" model="ir.ui.view">
+        <field name="name">passport.reader.form</field>
+        <field name="model">passport.reader</field>
+        <field name="arch" type="xml">
+            <form string="Passport Reader">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="contact_id"/>
+                        <field name="passport_number"/>
+                        <field name="expiration_date"/>
+                        <field name="file" filename="file_filename"/>
+                    </group>
+                    <footer>
+                        <button name="action_read_passport" type="object" string="📷 Leer pasaporte" class="btn-primary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_passport_reader_tree" model="ir.ui.view">
+        <field name="name">passport.reader.tree</field>
+        <field name="model">passport.reader</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="contact_id"/>
+                <field name="passport_number"/>
+                <field name="expiration_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_passport_reader" model="ir.actions.act_window">
+        <field name="name">Passport Readers</field>
+        <field name="res_model">passport.reader</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_passport_reader_root" name="Passport"/>
+    <menuitem id="menu_passport_reader" name="Passport Readers" parent="menu_passport_reader_root" action="action_passport_reader"/>
+</odoo>
