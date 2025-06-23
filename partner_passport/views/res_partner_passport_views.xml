@@ -1,0 +1,20 @@
+<odoo>
+    <record id="view_res_partner_passport_form" model="ir.ui.view">
+        <field name="name">res.partner.passport.form</field>
+        <field name="model">res.partner.passport</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="number"/>
+                        <field name="issue_date"/>
+                        <field name="expiry_date"/>
+                        <field name="image" widget="image"/>
+                        <button name="action_scan_passport" type="object" string="Scan Passport" groups="partner_passport.group_passport_officer"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
