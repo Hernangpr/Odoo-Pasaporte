@@ -6,7 +6,9 @@
     'author': 'Example',
     'depends': ['base'],
     'data': [
+        'security/ir.model.access.csv',
         'views/passport_reader_views.xml',
+        'views/res_partner_views.xml',
     ],
     'installable': True,
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_passport" model="ir.ui.view">
+        <field name="name">res.partner.form.passport</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Passport">
+                    <group>
+                        <field name="passport_number"/>
+                        <field name="passport_expiration_date"/>
+                        <field name="passport_status" widget="statusbar" statusbar_visible="valid,expiring,expired"/>
+                    </group>
+                    <group string="History">
+                        <field name="passport_history_ids" readonly="1" nolabel="1" context="{'default_partner_id': active_id}"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
