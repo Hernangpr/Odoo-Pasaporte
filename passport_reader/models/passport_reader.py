@@ -83,12 +83,25 @@ class PassportReader(models.Model):
                     self.passport_number = line
                     break
 
+        # Duplicate validation after parsing
+        if self.passport_number:
+            existing = self.env['res.partner'].search([
+                ('passport_number', '=', self.passport_number)
+            ], limit=1)
+            if existing:
+                raise UserError(_('Ya existe un contacto con este número de pasaporte.'))
+
     def action_read_passport(self):
         for record in self:
             text = record._extract_text_from_file()
             if not text:
                 raise UserError(_('Could not read passport.'))
             record.parse_passport_text(text)
+            if record.contact_id:
+                record.contact_id.write({
+                    'passport_number': record.passport_number,
+                    'passport_expiration_date': record.expiration_date,
+                })
         return True
 
     @api.model_create_multi
@@ -100,6 +113,9 @@ class PassportReader(models.Model):
         return records
 
     def write(self, vals):
+        if 'file' in vals:
+            vals.setdefault('passport_number', False)
+            vals.setdefault('expiration_date', False)
         res = super().write(vals)
         for record in self:
             if record.is_expired():
