@@ -1,5 +1,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from datetime import timedelta
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -58,3 +59,17 @@ class ResPartner(models.Model):
                 })
                 self.env['passport.history'].create(history_vals)
         return super().write(vals)
+
+    @api.model
+    def cron_check_passport_expiry(self):
+        today = fields.Date.today()
+        soon = today + timedelta(days=90)
+        partners = self.search([('passport_expiration_date', '!=', False)])
+        for partner in partners:
+            if partner.passport_expiration_date < today:
+                msg = _('Pasaporte vencido el %s') % partner.passport_expiration_date
+            elif today <= partner.passport_expiration_date <= soon:
+                msg = _('Pasaporte próximo a vencer el %s') % partner.passport_expiration_date
+            else:
+                continue
+            partner.message_post(body=msg)
